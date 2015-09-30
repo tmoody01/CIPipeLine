@@ -1,8 +1,6 @@
 class maven::install(
   $sitelocation = "http://10.50.20.49:8080/aaron/downloads/apache-maven-3.3.3-bin.tar.gz",
   $version = "apache-maven-3.3.3",
-  $str = "PATH=$PATH:%MAVEN_HOME%/opt/apache-maven-3.3.3/bin\nexport PATH",
-
 ){
   exec { 'download_maven':
     cwd     => '/opt',
@@ -17,12 +15,13 @@ class maven::install(
   
   exec { 'install_maven':
     cwd => '/opt',
-    command => "update-alternatives --install /usr/share/maven maven /opt/${version} 2",
+    command => "update-alternatives --install /usr/bin/mvn mvn /opt/${version}/bin/mvn 2",
     require => Exec['extract_maven'],
   }
   
   file { '/etc/profile.d/maven.sh':
-    content => "$str",
+    content => 'export MAVEN_HOME=/opt/apache-maven-3.3.3/bin
+	export PATH=$PATH:$MAVEN_HOME',
 	require => Exec['install_maven'],
   }
 }
