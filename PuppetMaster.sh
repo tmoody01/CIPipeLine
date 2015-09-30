@@ -2,8 +2,8 @@
 apt-get update
 apt-get install -y puppetmaster
 
-echo "10.50.15.95	mtmaster.netbuilder.private	puppetmaster" >> /etc/hosts
-echo "127.0.0.1	mtmaster.netbuilder.private	puppetmaster" >> /etc/hosts
+echo "$(facter ipaddress_eth1)	$(facter fqdn)	puppetmaster" >> /etc/hosts
+echo "127.0.0.1	$(facter fqdn)	puppetmaster" >> /etc/hosts
 
 touch /etc/puppet/manifests/site.pp
 
