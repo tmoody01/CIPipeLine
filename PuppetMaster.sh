@@ -9,4 +9,4 @@ touch /etc/puppet/manifests/site.pp
 
 echo '*.netbuilder.private' >> /etc/puppet/autosign.conf
 
-cp /vagrant/puppet -r /etc/puppet/
+sudo cp -r /vagrant/puppet/* /etc/puppet/
