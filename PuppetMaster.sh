@@ -8,3 +8,5 @@ echo "127.0.0.1	$(facter fqdn)	puppetmaster" >> /etc/hosts
 touch /etc/puppet/manifests/site.pp
 
 echo '*.netbuilder.private' >> /etc/puppet/autosign.conf
+
+cp /vagrant/puppet -r /etc/puppet/
