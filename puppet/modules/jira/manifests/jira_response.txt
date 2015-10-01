@@ -1,0 +1,8 @@
+#install jira
+o
+
+#choose express install
+1
+
+#confirm and install
+i
