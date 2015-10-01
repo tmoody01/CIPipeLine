@@ -18,21 +18,25 @@ class jenkins::install(
   
   package { 'package_jenkins':
     ensure  => installed,
+	name    => 'jenkins',
 	require => Exec['update_jenkins'],
-  }
-   
-  service { 'service_jenkins':
-    ensure  => running,
-	require => Package['package_jenkins'],
   }
   
   file_line { 'change_port_jenkins':
     path   => '/etc/default/jenkins',
-	line   => 'HTTP_PORT=8081',
+	line   => 'HTTP_PORT=8082',
     match  => '^HTTP_PORT=',
 	notify => Service['service_jenkins'],
 	require  => Package['package_jenkins'],
   }
+  
+  service { 'service_jenkins':
+    ensure  => running,
+    name    => 'jenkins',
+	require => File_line['change_port_jenkins'],
+  }
+  
+
   
 } # end class
 
