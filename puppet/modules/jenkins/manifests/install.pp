@@ -11,13 +11,14 @@ class jenkins::install(
 	require => Exec['download_jenkins'],
   }
   
-  exec { 'apt-get update':
+  exec { 'update_jenkins':
+    command => 'apt-get update',
 	require => Exec['echo_jenkins'],
   }
   
   package { 'package_jenkins':
     ensure  => installed,
-	require => Exec['apt-get update'],
+	require => Exec['update_jenkins'],
   }
    
   service { 'service_jenkins':
