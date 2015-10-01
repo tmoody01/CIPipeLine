@@ -1,5 +1,5 @@
 class maven::install(
-  $sitelocation = "http://10.50.20.49:8080/aaron/downloads/apache-maven-3.3.3-bin.tar.gz",
+  $sitelocation = "http://10.50.20.18:8080/aaron/downloads/apache-maven-3.3.3-bin.tar.gz",
   $version = "apache-maven-3.3.3",
 ){
   exec { 'download_maven':
