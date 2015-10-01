@@ -2,7 +2,8 @@ class jira::install {
  
  exec { 'download_jira':
   cwd => '/opt/',
-  command => 'wget http://10.50.20.18:8080/aaron/downloads/atlassian-jira-6.4.9-x64.bin',
+  command => "wget ${jira::jira_location}",
+  timeout =>  '0',
  }
  
  exec { 'chmod_jira':
@@ -11,9 +12,12 @@ class jira::install {
   require => Exec['download_jira'],
  }
  
- exec { 'response_jira':
-  command => 'printf "o\n1\ni\n"',
+ exec { 'run_jira':
+  cwd => '/opt/',
+  command => 'printf "o\n1\ni\n" | sudo ./atlassian-jira-6.4.9-x64.bin',
   require => Exec['chmod_jira'],
+  timeout => '0',
  }
+ 
  
 }
